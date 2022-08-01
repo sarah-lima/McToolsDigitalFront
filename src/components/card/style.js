@@ -9,6 +9,6 @@ export const CardComponent = styled.div`
     display: flex;
     justify-content: space-between;
     padding:0 5%;
-    margin: 35px 10%;
+    margin: 35px 0;
     align-items: center;
 `
