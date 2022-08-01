@@ -1,5 +1,7 @@
+import { ButtonComponent } from "./style";
+
 export default function Button({onClick, children}){
     return(
-        <button onClick={()=>onClick()} children={children} />
+        <ButtonComponent onClick={()=>onClick()} children={children} />
     )
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://34.193.99.6/",
+  baseURL: "https://mctoolsdigital-api.herokuapp.com/",
 });
 
 export default api;
