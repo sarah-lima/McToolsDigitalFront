@@ -11,11 +11,22 @@ function App() {
   const [initialDate, setInitialDate] = useState("");
   const [finallyDate, setFinallyDate] = useState("");
   const [fileType, setFileType] = useState("EXCEL");
+  const [sum, setSum] = useState(0)
 
   useEffect(() => {
-    api.get().then(({ data }) => {
-      setRes(data.data);
-    });
+    if(initialDate!== '' && finallyDate !== ''){
+      api.get(`/filter/?init_data=${initialDate}&terminal_data=${finallyDate}`).then(({ data }) => {
+        setRes(data.data);
+        setSum(data.sum);
+      });
+    }else{
+      console.log('a')
+      api.get('/filter')
+      .then(({ data }) => {
+        setRes(data.data);
+        setSum(data.sum);
+      });
+    }
   }, []);
 
   const submit = () => {
@@ -40,10 +51,12 @@ function App() {
   return (
     <>
       <Header />
+      <div style={{marginLeft:'10%'}}>
+      <div style={{color: '#28666E',  marginTop: "35px", fontSize: '18px'}}>
+        Consulta
+        </div>
       <div
         style={{
-          marginLeft: "10%",
-          marginTop: "35px",
           display: "flex",
           gap: "28px",
         }}
@@ -71,9 +84,14 @@ function App() {
         </select>
         <Button onClick={submit}>Filtrar</Button>
       </div>
-      {res.map((item) => {
+
+      <div style={{marginTop: '35px'}}>
+        Soma: {sum}
+      </div>
+      {res?.map((item) => {
         return <Card data={item} />;
       })}
+      </div>
     </>
   );
 }

@@ -6,4 +6,5 @@ height: 40px;
 border: none;
 background: #BBE6E4;
 border-radius: 3px;
+color: #28666E
 `
