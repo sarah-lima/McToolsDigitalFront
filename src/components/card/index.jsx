@@ -4,10 +4,10 @@ export default function Card({data}){
     return(
         <CardComponent>
             <div>
-                {data.data}
+                {data[0]}
             </div>
             <div>
-                {data.valor}
+                {data[1]}
             </div>
         </CardComponent>
     )

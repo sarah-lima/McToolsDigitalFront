@@ -14,6 +14,10 @@ function App() {
   const [sum, setSum] = useState(0);
 
   useEffect(() => {
+    get()
+  }, []);
+
+  const get = () => {
     if (initialDate !== "" && finallyDate !== "") {
       api
         .get(`/filter/?init_data=${initialDate}&terminal_data=${finallyDate}`)
@@ -22,14 +26,12 @@ function App() {
           setSum(data.sum);
         });
     } else {
-      console.log("a");
       api.get("/filter").then(({ data }) => {
         setRes(data.data);
         setSum(data.sum);
       });
     }
-  }, []);
-
+  }
   const submit = () => {
     var a = document.createElement("a");
     document.body.appendChild(a);
@@ -39,6 +41,7 @@ function App() {
         `/?init_data=${initialDate}&terminal_data=${finallyDate}&file_type=${fileType}`
       )
       .then((res) => {
+        get();
         a.href = res.request.responseURL;
         a.download = res.request.responseURL.substring(
           res.request.responseURL.lastIndexOf("_") + 1
@@ -46,7 +49,7 @@ function App() {
         a.click();
         window.URL.revokeObjectURL(res.request.responseURL);
       })
-      .catch((error) => console.log("Erro ao fazer download"));
+      .catch((error) => console.log("Erro ao fazer download"))
   };
 
   return (
@@ -87,7 +90,7 @@ function App() {
         </div>
 
         <div style={{ marginTop: "35px" }}>Soma: {sum}</div>
-        {res.map((item) => {
+        {res?.map((item) => {
           return <Card data={item} />;
         })}
       </div>
