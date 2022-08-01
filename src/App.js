@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Button from "./components/button";
 import Card from "./components/card";
+import FilterGroup from "./components/filterGroup";
 import Header from "./components/header";
 import Input from "./components/input";
 import api from "./services/api";
@@ -41,7 +42,6 @@ function App() {
         `/?init_data=${initialDate}&terminal_data=${finallyDate}&file_type=${fileType}`
       )
       .then((res) => {
-        get();
         a.href = res.request.responseURL;
         a.download = res.request.responseURL.substring(
           res.request.responseURL.lastIndexOf("_") + 1
@@ -59,11 +59,7 @@ function App() {
         <div style={{ color: "#28666E", marginTop: "35px", fontSize: "18px" }}>
           Consulta
         </div>
-        <div
-          style={{
-            display: "flex",
-            gap: "28px",
-          }}
+        <FilterGroup
         >
           <Input
             onChange={(e) => setInitialDate(e.target.value)}
@@ -87,7 +83,7 @@ function App() {
             <option value={"JSON"}>JSON</option>
           </select>
           <Button onClick={submit}>Filtrar</Button>
-        </div>
+        </FilterGroup>
 
         <div style={{ marginTop: "35px" }}>Soma: {sum}</div>
         {res?.map((item) => {

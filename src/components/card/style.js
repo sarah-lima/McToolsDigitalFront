@@ -11,4 +11,7 @@ export const CardComponent = styled.div`
     padding:0 5%;
     margin: 35px 0;
     align-items: center;
+    @media (max-width: 800px) {
+        width: 90%;
+    }
 `
